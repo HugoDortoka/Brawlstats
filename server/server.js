@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 const cors = require('cors');
+const db = require('./db');
 require('dotenv').config();
 
 const port = 3000;
