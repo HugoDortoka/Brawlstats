@@ -29,3 +29,16 @@ INSERT INTO sponsors (CIF, nom, logo) VALUES
 ('H70914163', 'Coca Cola', 'url_del_logo_2'),
 ('U14923668', 'VISA', 'url_del_logo_3'),
 ('V00420471', 'MasterCard', 'url_del_logo_4');
+
+-- Crear la tabla 'users' con los campos 'email', 'tag' y 'password'
+CREATE TABLE IF NOT EXISTS users (
+    email VARCHAR(255) NOT NULL,
+    tag VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (email)
+);
+
+-- Insertar 2 registros en la tabla 'users'
+INSERT INTO users (email, tag, password) VALUES
+('lucas@gmail.com', 'LGGCV99', SHA2('lucas', 256)),
+('hugo@gmail.com', '2P0CJV9', SHA2('hugo', 256));
