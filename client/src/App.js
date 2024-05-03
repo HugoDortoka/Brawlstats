@@ -41,59 +41,59 @@ function App() {
             {isDataFetched && (
                 <div className="details">
                     <div className="details__item">
-                        <div className="details__title">Player Icon</div>
-                        <div className="details__value"><img src="https://cdn.brawlstats.com/player-thumbnails/${playerData.icon.id}"></img></div>
+                        <div className="details__title"><h3>Player Icon</h3></div>
+                        <div className="details__value"><img src={`https://cdn.brawlstats.com/player-thumbnails/${playerData.icon.id}.png`} alt="Player Icon"/></div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Name</div>
+                        <div className="details__title"><h3>Player Name</h3></div>
                         <div className="details__value">{playerData.name}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Club</div>
+                        <div className="details__title"><h3>Player Club</h3></div>
                         <div className="details__value">{playerData.club.name}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Tag</div>
+                        <div className="details__title"><h3>Player Tag</h3></div>
                         <div className="details__value">{playerData.tag}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Trophies</div>
+                        <div className="details__title"><h3>Player Trophies</h3></div>
                         <div className="details__value">{playerData.trophies}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Highest Trophies</div>
+                        <div className="details__title"><h3>Player Highest Trophies</h3></div>
                         <div className="details__value">{playerData.highestTrophies}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Level</div>
+                        <div className="details__title"><h3>Player Level</h3></div>
                         <div className="details__value">{playerData.expLevel}</div>
                     </div>
                     {/* <div className="details__item">
-                        <div className="details__title">Player Unlocked Brawlers</div>
+                        <div className="details__title"><h3>Player Unlocked Brawlers</h3></div>
                         <div className="details__value"></div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Points to MAX</div>
+                        <div className="details__title"><h3>Player Points to MAX</h3></div>
                         <div className="details__value"></div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Coins to MAX</div>
+                        <div className="details__title"><h3>Player Coins to MAX</h3></div>
                         <div className="details__value"></div>
                     </div> */}
                     <div className="details__item">
-                        <div className="details__title">Player Solo Wins</div>
+                        <div className="details__title"><h3>Player Solo Wins</h3></div>
                         <div className="details__value">{playerData.soloVictories}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Duo Wins</div>
+                        <div className="details__title"><h3>Player Duo Wins</h3></div>
                         <div className="details__value">{playerData.duoVictories}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player 3vs3 Wins</div>
+                        <div className="details__title"><h3>Player 3vs3 Wins</h3></div>
                         <div className="details__value">{playerData["3vs3Victories"]}</div>
                     </div>
                     <div className="details__item">
-                        <div className="details__title">Player Robo Rumble</div>
+                        <div className="details__title"><h3>Player Robo Rumble</h3></div>
                         <div className="details__value">{playerData.bestRoboRumbleTime}</div>
                     </div>
                     <h1>Brawlers</h1>
