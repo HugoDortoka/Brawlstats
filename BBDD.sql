@@ -14,5 +14,3 @@ CREATE TABLE IF NOT EXISTS administrator (
 -- Insertar un registro en la tabla 'administrator' con la contraseña encriptada
 INSERT INTO administrator (email, password)
 VALUES ('admin@gmail.com', SHA2('admin', 256));
-
--- <img src="https://cdn.brawlstats.com/player-thumbnails/28000244.png"></img>
