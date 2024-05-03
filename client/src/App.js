@@ -40,6 +40,7 @@ function App() {
 
             {isDataFetched && (
                 <div className="details">
+                    <h1>Player Info</h1>
                     <div className="details__item">
                         <div className="details__title"><h3>Player Icon</h3></div>
                         <div className="details__value"><img src={`https://cdn.brawlstats.com/player-thumbnails/${playerData.icon.id}.png`} alt="Player Icon"/></div>
