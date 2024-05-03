@@ -14,3 +14,18 @@ CREATE TABLE IF NOT EXISTS administrator (
 -- Insertar un registro en la tabla 'administrator' con la contraseña encriptada
 INSERT INTO administrator (email, password)
 VALUES ('admin@gmail.com', SHA2('admin', 256));
+
+-- Crear la tabla 'sponsors' con los campos 'CIF', 'nom' y 'logo'
+CREATE TABLE IF NOT EXISTS sponsors (
+    CIF VARCHAR(255) NOT NULL,
+    nom VARCHAR(255) NOT NULL,
+    logo VARCHAR(255),
+    PRIMARY KEY (CIF)
+);
+
+-- Insertar 4 registros en la tabla 'sponsors'
+INSERT INTO sponsors (CIF, nom, logo) VALUES
+('C12481610', 'Adidas', 'url_del_logo_1'),
+('H70914163', 'Coca Cola', 'url_del_logo_2'),
+('U14923668', 'VISA', 'url_del_logo_3'),
+('V00420471', 'MasterCard', 'url_del_logo_4');
