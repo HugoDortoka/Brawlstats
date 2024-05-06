@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Home() {
+function Search() {
     const [playerTag, setPlayerTag] = useState('');
     const [playerData, setPlayerData] = useState(null);
     const [error, setError] = useState('');
@@ -31,7 +31,7 @@ function Home() {
                     placeholder="Enter Player Tag"
                     value={playerTag}
                     onChange={(e) => setPlayerTag(e.target.value)}
-                />
+                />''
                 <button className="form__submit" onClick={getPlayerDetails}>Get Details</button>
             </div>
 
@@ -103,4 +103,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Search;

@@ -1,7 +1,7 @@
 // About.js
 import React from 'react';
 
-function About() {
+function Wiki() {
   return (
     <div>
       <h1>About</h1>
@@ -10,4 +10,4 @@ function About() {
   );
 }
 
-export default About;
+export default Wiki;

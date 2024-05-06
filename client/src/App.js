@@ -5,21 +5,22 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Layout from './components/Layout';
-import Home from './components/Home';
-import About from './components/About';
-import Contact from './components/Contact';
+import Search from './components/Search';
+import Wiki from './components/Wiki';
+import Top from './components/Top';
+import AdminLogin from './components/admin/AdminLogin';
 import NotFound from './components/NotFound';
 
 function App() {
   return (
     <div>
-       <h1>Routes</h1>
        <Routes>
           <Route path='/' element={<Layout />}>
-            <Route path='about' element={<About />} />
-            <Route path='/' element={<Home />} />
-            <Route path='contact' element={<Contact />} />
+            <Route path='/' element={<Search />} />
+            <Route path='wiki' element={<Wiki />} />
+            <Route path='top' element={<Top />} />
           </Route>
+          <Route path='adminLogin' element={<AdminLogin />} />
        </Routes>
     </div>
   );

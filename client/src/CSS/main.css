@@ -1,0 +1,31 @@
+/* styles.css */
+
+.header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+  
+  .left, .middle, .right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .middle .link {
+    margin-right: 10px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .right .link {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .right span {
+    margin: 0 5px;
+    color: #fff;
+  }
+  
