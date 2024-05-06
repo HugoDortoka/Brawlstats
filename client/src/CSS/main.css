@@ -1,31 +1,62 @@
-/* styles.css */
-
 .header {
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+/* Añadir padding a la izquierda de "Brawl Stats" */
+.left h1 {
+  padding-left: 200px;
+}
+
+/* Añadir padding a la derecha de "Login" */
+.right .link:last-child {
+  padding-right: 200px;
+}
+
+/* Estilo del botón de menú para dispositivos móviles */
+.menu-button {
+  display: none; /* Ocultar el botón en pantallas grandes */
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Estilos del menú desplegable en dispositivos móviles */
+.right.open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+/* Estilos de los enlaces del menú en dispositivos móviles */
+.link {
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+}
+
+/* Mostrar el botón de menú solo en dispositivos móviles */
+@media (max-width: 768px) {
+  .menu-button {
+    display: block;
   }
-  
-  .left, .middle, .right {
-    display: flex;
-    align-items: center;
+  .left h1 {
+    padding-left: 10px;
   }
-  
-  .middle .link {
-    margin-right: 10px;
-    color: #fff;
-    text-decoration: none;
+  .right {
+    display: none; /* Ocultar el menú en pantallas pequeñas */
   }
-  
-  .right .link {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .right span {
-    margin: 0 5px;
-    color: #fff;
-  }
-  
+}
