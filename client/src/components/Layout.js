@@ -1,42 +1,49 @@
-import { Outlet } from "react-router-dom"
-
-import React, { useState } from 'react';
+import { Outlet } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/main.css';
 
 function Layout() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    const toggleBtn = document.querySelector('.toggle_btn');
+    const dropDownMenu = document.querySelector('.dropdown_menu');
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+    const toggleMenu = () => {
+      dropDownMenu.classList.toggle('open');
+      const isOpen = dropDownMenu.classList.contains('open');
+      toggleBtn.textContent = isOpen ? 'CERRAR' : 'MENU';
+    };
+
+    toggleBtn.addEventListener('click', toggleMenu);
+
+    // Limpia el evento al desmontar el componente
+    return () => toggleBtn.removeEventListener('click', toggleMenu);
+  }, []); // Asegura que se ejecute solo una vez después del montaje inicial
 
   return (
     <div>
-      <header className="header">
-        <div className="left">
-          <h1>Brawl Stats</h1>
-        </div>
-        <div className="middle">
-          {/* Enlaces del menú */}
-          <Link to="/" className="link">Search</Link>
-          <Link to="/wiki" className="link">Wiki</Link>
-          <Link to="/top" className="link">Top</Link>
-        </div>
-        <div className={`right ${menuOpen ? 'open' : ''}`}>
-          {/* Botón de menú para dispositivos móviles */}
-          <button className="menu-button" onClick={toggleMenu}>
-            Menu
-          </button>
-          {/* Enlaces de registro y inicio de sesión */}
-          <div>
-            <Link to="/register" className="link">Register</Link>
-            <span className="link"> | </span>
-            <Link to="/login" className="link">Login</Link>
+      <header>
+        <div className="navbar">
+          <div className="logo"><Link to="/" className="logo">Brawl Stats</Link></div>
+        
+          <ul className="links">
+            <li><Link to="/" className="link">Search</Link></li>
+            <li><Link to="/wiki" className="link">Wiki</Link></li>
+            <li><Link to="/top" className="link">Top</Link></li>
+          </ul>
+          <Link to="/login" className="action_btn">Log In</Link>
+          <div className="toggle_btn">
+            MENU
           </div>
         </div>
+        <div className="dropdown_menu">
+          <li><Link to="/" className="link">Search</Link></li>
+          <li><Link to="/wiki" className="link">Wiki</Link></li>
+          <li><Link to="/top" className="link">Top</Link></li>
+          <li><Link to="/login" className="action_btn">Log In</Link></li>
+        </div>
       </header>
-      {/* Outlet para mostrar el contenido */}
+
       <Outlet />
     </div>
   );
