@@ -1,12 +1,12 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
     
 }
 
 body{
-    background-color: #000000;
+    background-color: #F2F2F2;
 }
 /*Header*/
 li{
@@ -111,8 +111,24 @@ header {
 /* Main */
 
 .form {
-    height: 100vh;
+    height: 656px;
+    background: url(../assets/images/front-bg-small.f14153.jpg) 0/cover;
     display: grid;
     place-content: center;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 350px 100px;
+}
+.form__input {
+    height: 50px;
+}
+.form__submit {
+    background-color: #0A73E5;
+    border: none; /* Eliminar borde */
+    outline: none; /* Eliminar contorno */
+    box-shadow: none; /* Eliminar sombra */
+}
+
+@media(max-width: 992px){
+    .form {
+        grid-template-columns: 200px 100px;
+    }
 }
