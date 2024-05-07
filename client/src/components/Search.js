@@ -28,10 +28,10 @@ function Search() {
                 <input
                     type="text"
                     className="form__input"
-                    placeholder="Enter Player Tag"
+                    placeholder="#XXXXXXXX"
                     value={playerTag}
                     onChange={(e) => setPlayerTag(e.target.value)}
-                />''
+                />
                 <button className="form__submit" onClick={getPlayerDetails}>Get Details</button>
             </div>
 

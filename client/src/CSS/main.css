@@ -8,7 +8,7 @@
 body{
     background-color: #000000;
 }
-
+/*Header*/
 li{
     list-style: none;
 }
@@ -105,4 +105,14 @@ header {
         left: 2rem;
         width: unset;
     }
+}
+
+
+/* Main */
+
+.form {
+    height: 100vh;
+    display: grid;
+    place-content: center;
+    grid-template-columns: 200px 100px;
 }
