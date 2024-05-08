@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AdminLogin() {
+function AdminLogin({ onAdminLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -20,6 +20,8 @@ function AdminLogin() {
       });
 
       if (response.ok) {
+        localStorage.setItem('adminLoggedIn', 'true');
+        onAdminLogin(); // Llama a la función onLogin
         navigate('/adminHome');
       } else {
         window.alert('Credenciales incorrectas');
