@@ -33,6 +33,7 @@ function Search() {
             setPlayerData(null);
         });
     }
+    //console.log(playerData.brawlers);
     return (
         <div className="container">
             <div className="form">
@@ -100,10 +101,34 @@ function Search() {
                         <div className="details__value">{playerData.bestRoboRumbleTime}</div>
                     </div>
                     <h1>Brawlers ({playerData.brawlers.length}/{brawlersData.items.length})</h1>
+                    <div className='brawlersContainer'>
+                        {playerData.brawlers.map(brawler => (
+                            <div key={brawler.id} className='brawlContainer' >
+                                <div className='boxBrawl'>
+                                    <img src={`https://cdn.brawlstats.com/character-arts/${brawler.id}.png`} alt={`${brawler.name}`}></img>
+                                    <div className='skillsBrawl'>
+                                        {brawler.starPowers.map(starPower => (
+                                            <div>
+                                                <img key={starPower.id} src={`https://cdn.brawlstats.com/star-powers/${starPower.id}.png`} alt={`${brawler.name} - ${starPower.name}`} />
+                                            </div>
+                                        ))}
+                                        {brawler.gadgets.map(gadget => (
+                                            <div>
+                                                <img key={gadget.id} src={`https://cdn.brawlstats.com/gadgets/${gadget.id}.png`} alt={`${brawler.name} - ${gadget.name}`} />
+                                            </div>
+                                        ))}
 
-                    {playerData.brawlers.map(brawler => (
-                        <div key={brawler.id}><img src={`https://cdn.brawlstats.com/character-arts/${brawler.id}.png`} alt={`${brawler.name}`}></img>{brawler.name}</div>
-                    ))}
+                                    </div>
+                                </div>
+                                <div className='infoBrawl'>
+                                    <div>{brawler.name}</div>
+                                    <div>Level<br></br>{brawler.power}</div>
+                                    <div>Current<br></br>{brawler.trophies}</div>
+                                    <div>Highest<br></br>{brawler.highestTrophies}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

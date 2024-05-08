@@ -109,7 +109,9 @@ header {
 
 
 /* Main */
-
+.container {
+    
+}
 .form {
     height: 656px;
     background: url(../assets/images/front-bg-small.f14153.jpg) 0/cover;
@@ -131,4 +133,60 @@ header {
     .form {
         grid-template-columns: 200px 100px;
     }
+}
+
+/* Personal Brawlers */
+.details{
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    align-items: center;
+    justify-content: space-between;
+}
+.brawlersContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,270px);
+    grid-gap: 20px;
+    justify-content: space-between;
+}
+.brawlContainer{
+   background-color: #94D7F4;
+   border: #000000 1px solid;
+}
+
+.brawlContainer img {
+    height: 112px;
+}
+.boxBrawl{
+    height: 112px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.infoBrawl{
+    height: 48px;
+    color: white;
+    background-color: #000000;
+    display: grid;
+    grid-template-columns: 35% 19% 23% 23.7%;
+
+}
+.infoBrawl div{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+.skillsBrawl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-right: 10px;
+    padding: 7px;
+}
+.skillsBrawl div img {
+    height: 28px;
+}
+.skillsBrawl div {
+    margin-top: 5px;
+    display: grid;
+    justify-items: right;
 }
