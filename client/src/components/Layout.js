@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/main.css';
 
-function Layout() {
+function Layout({ userLogged }) {
   useEffect(() => {
     const toggleBtn = document.querySelector('.toggle_btn');
     const dropDownMenu = document.querySelector('.dropdown_menu');
@@ -31,7 +31,11 @@ function Layout() {
             <li><Link to="/wiki" className="link">Wiki</Link></li>
             <li><Link to="/top" className="link">Top</Link></li>
           </ul>
-          <Link to="/login" className="action_btn">Log In</Link>
+          {userLogged === 'true' ? (
+            <Link to="/profile" className="action_btn">Profile</Link>
+          ) : (
+            <Link to="/login" className="action_btn">Log In</Link>
+          )}
           <div className="toggle_btn">
             MENU
           </div>

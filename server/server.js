@@ -42,6 +42,30 @@ app.post('/adminLogin', (req, res) => {
     }
   });
 });
+
+app.post('/userLogin', (req, res) => {
+  const { email, password } = req.body;
+
+  const encryptedPassword = encryptPassword(password);
+
+  // Realiza la validación de credenciales en tu base de datos
+  db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, encryptedPassword], (err, results) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta:', err);
+      res.status(500).send('Error interno del servidor');
+      return;
+    }
+
+    if (results.length > 0) {
+      // Si hay resultados, significa que las credenciales son correctas
+      res.status(200).send('Inicio de sesión exitoso');
+    } else {
+      // Si no hay resultados, las credenciales son incorrectas
+      res.status(401).send('Credenciales incorrectas');
+    }
+  });
+});
+
 app.get('/brawlers', (req, res) => {
   axios({
       method: 'get',
