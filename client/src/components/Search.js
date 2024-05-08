@@ -33,7 +33,6 @@ function Search() {
             setPlayerData(null);
         });
     }
-    console.log(playerData.brawlers);
     return (
         <div className="container">
             <div className="form">
@@ -103,7 +102,7 @@ function Search() {
                     <h1>Brawlers ({playerData.brawlers.length}/{brawlersData.items.length})</h1>
 
                     {playerData.brawlers.map(brawler => (
-                        <div key={brawler.id}>{brawler.id}</div>
+                        <div key={brawler.id}><img src={`https://cdn.brawlstats.com/character-arts/${brawler.id}.png`} alt={`${brawler.name}`}></img>{brawler.name}</div>
                     ))}
                 </div>
             )}
