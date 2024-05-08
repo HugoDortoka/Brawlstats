@@ -20,7 +20,7 @@ function encryptPassword(password) {
   return crypto.createHash('sha256').update(password).digest('hex');
 }
 
-app.post('/login', (req, res) => {
+app.post('/adminLogin', (req, res) => {
   const { email, password } = req.body;
 
   const encryptedPassword = encryptPassword(password);

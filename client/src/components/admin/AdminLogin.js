@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch('http://localhost:3000/adminLogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -18,11 +20,9 @@ function AdminLogin() {
       });
 
       if (response.ok) {
-        // Si la respuesta es exitosa, redirige a otra página o realiza alguna otra acción
-        console.log('Inicio de sesión exitoso');
+        navigate('/adminHome');
       } else {
-        // Si hay un error en la respuesta, muestra un mensaje de error
-        console.log('Credenciales incorrectas');
+        window.alert('Credenciales incorrectas');
       }
     } catch (error) {
       console.error('Error al enviar la solicitud:', error);
