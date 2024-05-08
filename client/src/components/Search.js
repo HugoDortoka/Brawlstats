@@ -1,14 +1,26 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Search() {
     const [playerTag, setPlayerTag] = useState('');
     const [playerData, setPlayerData] = useState(null);
+    const [brawlersData, setBrawlersData] = useState(null);
     const [error, setError] = useState('');
 
     const isDataFetched = playerData !== null && playerData.name !== undefined;
-
+    useEffect(() => {
+        // Esta función se ejecuta cuando el componente se monta
+        // Aquí podemos obtener la lista de brawlers
+        axios.get('http://localhost:3000/brawlers')
+            .then(response => {
+                setBrawlersData(response.data);
+                
+            })
+            .catch(error => {
+                console.error('Error fetching brawlers:', error);
+            });
+    }, []);
     const getPlayerDetails = () => {
         axios
         .get(`http://localhost:3000/${playerTag}`)
@@ -21,7 +33,7 @@ function Search() {
             setPlayerData(null);
         });
     }
-
+    console.log(playerData.brawlers);
     return (
         <div className="container">
             <div className="form">
@@ -68,18 +80,10 @@ function Search() {
                         <div className="details__title"><h3>Player Level</h3></div>
                         <div className="details__value">{playerData.expLevel}</div>
                     </div>
-                    {/* <div className="details__item">
+                    <div className="details__item">
                         <div className="details__title"><h3>Player Unlocked Brawlers</h3></div>
-                        <div className="details__value"></div>
+                        <div className="details__value">{playerData.brawlers.length} / {brawlersData.items.length}</div>
                     </div>
-                    <div className="details__item">
-                        <div className="details__title"><h3>Player Points to MAX</h3></div>
-                        <div className="details__value"></div>
-                    </div>
-                    <div className="details__item">
-                        <div className="details__title"><h3>Player Coins to MAX</h3></div>
-                        <div className="details__value"></div>
-                    </div> */}
                     <div className="details__item">
                         <div className="details__title"><h3>Player Solo Wins</h3></div>
                         <div className="details__value">{playerData.soloVictories}</div>
@@ -96,7 +100,11 @@ function Search() {
                         <div className="details__title"><h3>Player Robo Rumble</h3></div>
                         <div className="details__value">{playerData.bestRoboRumbleTime}</div>
                     </div>
-                    <h1>Brawlers</h1>
+                    <h1>Brawlers ({playerData.brawlers.length}/{brawlersData.items.length})</h1>
+
+                    {playerData.brawlers.map(brawler => (
+                        <div key={brawler.id}>{brawler.id}</div>
+                    ))}
                 </div>
             )}
         </div>

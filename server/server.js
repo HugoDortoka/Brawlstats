@@ -42,10 +42,27 @@ app.post('/adminLogin', (req, res) => {
     }
   });
 });
+app.get('/brawlers', (req, res) => {
+  axios({
+      method: 'get',
+      url: 'https://api.brawlstars.com/v1/brawlers',
+      headers: {
+          'Authorization': `Bearer ${apiKey}`
+      }
+  })
+  .then(response => {
+      // Manejar la respuesta exitosa
+      res.send(response.data);
+  })
+  .catch(error => {
+      // Manejar el error
+      console.log(error);
+      res.send('Error al obtener la lista de brawlers');
+  });
+});
 
 app.get('/:playerTag', (req, res) => {
-
-    playerTag = req.params.playerTag;
+    const playerTag = req.params.playerTag;
 
     axios({
         method: 'get',
@@ -56,20 +73,19 @@ app.get('/:playerTag', (req, res) => {
       })
         .then(response => {
           // Handle successful response
-          res.send( (response.data) );
+          res.send(response.data);
         })
         .catch(error => {
           // Handle error
           console.log(error);
-          res.send( 'Player Not Found' );
+          res.send('Player Not Found');
         });
-
 });
 
 app.get('/', (req, res) => {
-  res.send('Send Player Tag in URL')
-})
+  res.send('Send Player Tag in URL');
+});
 
 app.listen(port, () => {
-  console.log(`API listening at http://localhost:${port}`)
-})
+  console.log(`API listening at http://localhost:${port}`);
+});
