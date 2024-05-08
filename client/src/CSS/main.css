@@ -8,6 +8,10 @@
 body{
     background-color: #F2F2F2;
 }
+footer {
+    height: 150px;
+    background-color: #000000;
+}
 /*Header*/
 li{
     list-style: none;
@@ -148,6 +152,7 @@ header {
     grid-template-columns: repeat(auto-fill,270px);
     grid-gap: 20px;
     justify-content: space-between;
+    margin-bottom: 50px;
 }
 .brawlContainer{
    background-color: #94D7F4;
