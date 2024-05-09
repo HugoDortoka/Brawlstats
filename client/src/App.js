@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Search from './components/Search';
 import Wiki from './components/Wiki';
 import Top from './components/Top';
+import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Footer from './components/Footer';
@@ -47,6 +48,7 @@ function App() {
             <Route path='top' element={<Top />} />
             <Route path='login' element={<Login onUserLogin={handleUserLogin} />} />
             <Route path='profile' element={userLoggedIn ? <Profile onUserLogout={handleUserLogout} /> : <Navigate to="/" />} />
+            <Route path='register' element={<Register />} />
           </Route>
           <Route path='adminLogin' element={<AdminLogin onAdminLogin={handleAdminLogin} />} />
           <Route path='adminHome' element={adminLoggedIn ? <AdminHome onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />

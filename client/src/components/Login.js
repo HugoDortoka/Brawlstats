@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Login({ onUserLogin }) {
     const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ function Login({ onUserLogin }) {
   
     return (
       <div>
-        <h1>User Login</h1>
+        <h1>User Log In</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -43,6 +44,7 @@ function Login({ onUserLogin }) {
           </div>
           <button type="submit">Log In</button>
         </form>
+        <Link to="/register" className="link">Register</Link>
       </div>
     );
   }

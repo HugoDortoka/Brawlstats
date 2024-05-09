@@ -66,6 +66,39 @@ app.post('/userLogin', (req, res) => {
   });
 });
 
+app.post('/register', (req, res) => {
+  const { email, tag, password } = req.body;
+
+  // Verifica si el email ya está registrado
+  db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta:', err);
+      res.status(500).send('Error interno del servidor');
+      return;
+    }
+
+    if (results.length > 0) {
+      // El email ya está registrado
+      res.status(400).send('El email ya está registrado');
+    } else {
+      // El email no está registrado, procede con el registro
+      const encryptedPassword = encryptPassword(password);
+
+      // Inserta el nuevo usuario en la base de datos
+      db.query('INSERT INTO users (email, tag, password) VALUES (?, ?, ?)', [email, tag, encryptedPassword], (err, results) => {
+        if (err) {
+          console.error('Error al ejecutar la consulta de inserción:', err);
+          res.status(500).send('Error interno del servidor');
+          return;
+        }
+
+        // Registro exitoso
+        res.status(201).send('Registro exitoso');
+      });
+    }
+  });
+});
+
 app.get('/brawlers', (req, res) => {
   axios({
       method: 'get',
