@@ -5,7 +5,10 @@ import React from 'react';
 function Footer() {
   return (
     <footer>
-      <p>Este es el pie de página de mi aplicación.</p>
+      <div>
+        <div></div>
+        <div className='logoFooter'></div>
+      </div>
     </footer>
   );
 }

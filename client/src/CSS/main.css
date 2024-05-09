@@ -8,10 +8,8 @@
 body{
     background-color: #F2F2F2;
 }
-footer {
-    height: 150px;
-    background-color: #000000;
-}
+
+
 /*Header*/
 li{
     list-style: none;
@@ -138,12 +136,23 @@ header {
         grid-template-columns: 200px 100px;
     }
 }
+/* Info Player */
+.infoTable {
+    background-color: white;
+    padding: 40px;
+}
+.filaInfo {
+    margin-top: 10px;
+    background-color: #F2F2F2;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
 /* Personal Brawlers */
 .details{
     max-width: 1200px;
     margin: 0 auto;
-    
     align-items: center;
     justify-content: space-between;
 }
@@ -153,6 +162,7 @@ header {
     grid-gap: 20px;
     justify-content: space-between;
     margin-bottom: 50px;
+    margin-top: 20px;
 }
 .brawlContainer{
    background-color: #94D7F4;
@@ -194,4 +204,31 @@ header {
     margin-top: 5px;
     display: grid;
     justify-items: right;
+}
+.nameBrawl {
+ font-weight: 600;
+}
+
+/* Footer */
+
+.logoFooter {
+    height: 80px;
+    width: 100px;
+    background: url("../assets/images/bs-logo.png") 0/cover;
+}
+
+
+footer {
+    height: 150px;
+    background-color: #000000;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+footer div { 
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1100px 100px;
+    
 }
