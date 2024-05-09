@@ -94,7 +94,8 @@ header {
     }
 
     .navbar .toggle_btn {
-        display: block;
+        display: grid;
+        
     }
 
     .dropdown_menu {
@@ -117,10 +118,25 @@ header {
     background: url(../assets/images/front-bg-small.f14153.jpg) 0/cover;
     display: grid;
     place-content: center;
-    grid-template-columns: 350px 100px;
+
 }
+.form  > div:first-child {
+    color: white;
+    font-weight: bold;
+    font-size: 44px;
+    width: 450px;
+    margin-bottom: 20px;
+}
+.searchBar {
+   display: grid;
+   grid-template-columns: 370px 80px; 
+}
+
 .form__input {
-    height: 50px;
+    height: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
 }
 .form__submit {
     background-color: #0A73E5;
@@ -130,8 +146,12 @@ header {
 }
 
 @media(max-width: 992px){
-    .form {
-        grid-template-columns: 200px 100px;
+    .searchBar {
+        grid-template-columns: 220px 80px;
+    }
+    .form  > div:first-child {
+        font-size: 30px;
+        width: 300px;
     }
 }
 
@@ -227,6 +247,10 @@ header {
         margin-left: 20px;
         
     }
+    .details__name {
+        font-size: 35px;
+    
+    }
 }
 
 /* Personal Brawlers */
@@ -236,6 +260,7 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+
 .brawlersContainer{
     display: grid;
     grid-template-columns: repeat(auto-fill,270px);
@@ -292,6 +317,10 @@ header {
         justify-content: center;
         
     }
+    .titleBrawlers{
+        padding-left: 10px;
+    }
+    
 }
 /* Footer */
 
