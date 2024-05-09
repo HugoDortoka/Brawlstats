@@ -1,11 +1,6 @@
 import React from 'react';
 
 
-function isImageExist(url) {
-  const img = new Image();
-  img.src = url;
-  return img.complete || (img.width + img.height) > 0;
-}
 
 function BrawlContainer({ brawler }) {
   // Función para obtener el color de fondo según el nombre del brawler
@@ -111,16 +106,12 @@ function BrawlContainer({ brawler }) {
         <div className='skillsBrawl'>
           {brawler.starPowers.map(starPower => (
             <div key={starPower.id}>
-             {starPower.id && isImageExist(`https://cdn.brawlstats.com/star-powers/${starPower.id}.png`) && (
                 <img src={`https://cdn.brawlstats.com/star-powers/${starPower.id}.png`} alt={`${brawler.name} - ${starPower.name}`} />
-              )}
             </div>
           ))}
           {brawler.gadgets.map(gadget => (
             <div key={gadget.id}>
-              {gadget.id && isImageExist(`https://cdn.brawlstats.com/gadgets/${gadget.id}.png`) && (
                 <img src={`https://cdn.brawlstats.com/gadgets/${gadget.id}.png`} alt={`${brawler.name} - ${gadget.name}`} />
-              )}
             </div>
           ))}
         </div>

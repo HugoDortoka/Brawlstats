@@ -111,9 +111,7 @@ header {
 
 
 /* Main */
-.container {
-    
-}
+
 .form {
     height: 656px;
     background: url(../assets/images/front-bg-small.f14153.jpg) 0/cover;
@@ -136,18 +134,73 @@ header {
         grid-template-columns: 200px 100px;
     }
 }
+
 /* Info Player */
 .infoTable {
+    margin-top: 40px;
+    margin-bottom: 40px;
     background-color: white;
-    padding: 40px;
+    padding: 120px;
+}
+.iconImg {
+    height: 117px;
+}
+.clubImg {
+    height: 23px;
+}
+.details__name {
+    font-size: 40px;
+    font-weight: bold;
+}
+.details__tag {
+    text-align: right;
+    font-size: 20px;
+    color: #3B4151;
+    font-weight: 600;
+}
+.details__club {
+    display: flex;
+    align-items: center;
+    color: #3B4151;
+    font-size: 20px;
+    font-weight: 600;
+}
+.details__item {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    margin-bottom: 60px;
 }
 .filaInfo {
     margin-top: 10px;
     background-color: #F2F2F2;
-    height: 60px;
+   
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 20px;
 }
+.columnaInfo {
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+}
+.columnaInfo img {
+    height: 35px;
+}
+.columnaInfo div {
+    font-size: 18px;
+    font-weight: 600;
+}
+.filaInfo > div:first-child {
+    margin-right: 20px;
+}
+.columnaInfo > div:nth-child(2) {
+    text-align: left;
+    
+}
+.columnaInfo > div:nth-child(3) {
+    text-align: right;
+    
+}
+
 
 /* Personal Brawlers */
 .details{
@@ -203,7 +256,7 @@ header {
 .skillsBrawl div {
     margin-top: 5px;
     display: grid;
-    justify-items: right;
+    justify-items: center;
 }
 .nameBrawl {
  font-weight: 600;
@@ -231,4 +284,13 @@ footer div {
     display: grid;
     grid-template-columns: 1100px 100px;
     
+}
+
+@media(max-width: 1236px){
+    footer div { 
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: 91.66% 8.33%;
+        
+    }
 }
