@@ -7,9 +7,12 @@ function Search() {
     const [playerTag, setPlayerTag] = useState('');
     const [playerData, setPlayerData] = useState(null);
     const [brawlersData, setBrawlersData] = useState(null);
+    const [battleLog, setBattleLog] = useState(null);
     const [error, setError] = useState('');
 
-    const isDataFetched = playerData !== null && playerData.name !== undefined;
+
+
+    const isDataFetched = playerData !== null && playerData.name !== undefined && battleLog!==null; 
     useEffect(() => {
         // Esta función se ejecuta cuando el componente se monta
         // Aquí podemos obtener la lista de brawlers
@@ -22,6 +25,8 @@ function Search() {
                 console.error('Error fetching brawlers:', error);
             });
     }, []);
+
+    
     const getPlayerDetails = () => {
         axios
         .get(`http://localhost:3000/${playerTag}`)
@@ -33,8 +38,34 @@ function Search() {
             setError(err.response.data.message || 'Player Not Found');
             setPlayerData(null);
         });
+        axios
+        .get(`http://localhost:3000/${playerTag}/battlelog`)
+        .then((response) => {
+            setBattleLog(response.data);
+            setError('');
+        })
+        .catch((err) => {
+            setError(err.response.data.message || 'Player Not Found');
+            setBattleLog(null);
+        });
+
+
+        
     }
-    //console.log(playerData.brawlers);
+    useEffect(() => {
+
+        if (battleLog) {
+            battleLog.items.forEach((item, index) => {
+                var resultadoDiv = document.getElementById(`result${index}`);
+                if (item.battle.result === "victory") {
+                    resultadoDiv.style.backgroundColor = "rgb(25, 216, 0)";
+                } else {
+                    resultadoDiv.style.backgroundColor = "rgb(225, 59, 30)";
+                }
+            });
+        }
+    }, [battleLog]);
+    
     return (
         <div className="container">
             <div className="form">
@@ -114,7 +145,20 @@ function Search() {
                                 <div>Level {playerData.bestRoboRumbleTime}</div>
                             </div>
                         </div>
+               
                     </div>
+                    <h1 className='titleBrawlers'>Battle Log {battleLog.items.length}</h1>
+                   
+                        <div className='battleContainer'>
+                            {battleLog.items.map((item, index)=> (
+                                <div className='gamePlayed' id={`result${index}`}>
+                                    {console.log(item)}                                   
+                                    <img src={`https://cdn-old.brawlify.com/gamemode/${item.event.mode.charAt(0).toUpperCase() + item.event.mode.slice(1).replace(/([A-Z])(?=[a-z])/g, '-$1')}.png`} alt={item.event.mode}></img>
+                                </div>
+                            ))}
+                        </div>
+                    <h3>Last {battleLog.items.length} games - Victories: {battleLog.items.filter(item => item.battle.result === "victory").length} | Defeats: {battleLog.items.filter(item => item.battle.result === "defeat").length}</h3>
+
                     <h1 className='titleBrawlers'>Brawlers ({playerData.brawlers.length}/{brawlersData.items.length})</h1>
                     <div className='brawlersContainer'>
                         {playerData.brawlers.map(brawler => (

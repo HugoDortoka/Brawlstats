@@ -118,6 +118,27 @@ app.get('/brawlers', (req, res) => {
   });
 });
 
+app.get('/playersTop/:countryCode', (req, res) => {
+  const countryCode = req.params.countryCode;
+
+  axios({
+      method: 'get',
+      url:`https://api.brawlstars.com/v1/rankings/${countryCode}/players`,
+      headers: {
+        'Authorization':` Bearer ${apiKey}`
+      }
+    })
+      .then(response => {
+        // Handle successful response
+        res.send(response.data);
+      })
+      .catch(error => {
+        // Handle error
+        console.log(error);
+        res.send('Players Top Not Found');
+      });
+});
+
 app.get('/:playerTag', (req, res) => {
     const playerTag = req.params.playerTag;
 
@@ -137,6 +158,27 @@ app.get('/:playerTag', (req, res) => {
           console.log(error);
           res.send('Player Not Found');
         });
+});
+
+app.get('/:playerTag/battlelog', (req, res) => {
+  const playerTag = req.params.playerTag;
+
+  axios({
+      method: 'get',
+      url: `https://api.brawlstars.com/v1/players/%23${playerTag}/battlelog`,
+      headers: {
+        'Authorization': `Bearer ${apiKey}`
+      }
+    })
+      .then(response => {
+        // Handle successful response
+        res.send(response.data);
+      })
+      .catch(error => {
+        // Handle error
+        console.log(error);
+        res.send('Player Not Found');
+      });
 });
 
 app.get('/', (req, res) => {
