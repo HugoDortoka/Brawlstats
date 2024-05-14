@@ -72,16 +72,18 @@ function Profile({ onUserLogout }) {
     return (
       <div>
         
-        <div className="container">
-          <h1>User Profile</h1>
-          <button onClick={() => {
-            onUserLogout(); // Llama a la función onLogout
-            navigate('/');
-          }}>Cerrar sesión</button>
-            
+        <div className="container">            
 
             {isDataFetched && (
                 <div className="details">
+                    <div className='titleLogout'>
+                        <h1>Profile</h1>
+                        <button onClick={() => {
+                            onUserLogout(); // Llama a la función onLogout
+                            navigate('/');
+                        }}>Cerrar sesión</button>
+                    </div>
+
                     <div className='infoTable'>
                         <div className="details__item">
                             <div className="details__value"><img className='iconImg' src={`https://cdn.brawlstats.com/player-thumbnails/${playerData.icon.id}.png`} alt="Player Icon"/></div>
