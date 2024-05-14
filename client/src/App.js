@@ -27,7 +27,7 @@ function App() {
   };
 
   const [userLoggedIn, setUserLoggedIn] = useState(
-    localStorage.getItem('userLoggedIn') === 'true'
+    localStorage.getItem('userLoggedIn') !== null && localStorage.getItem('userLoggedIn') !== ''
   );
 
   const handleUserLogin = () => {

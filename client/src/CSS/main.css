@@ -91,6 +91,10 @@ header {
 @media(max-width: 992px){
     .navbar .links, .navbar .action_btn{
         display: none;
+      
+    }
+    .links {
+        font-weight: 600;
     }
 
     .navbar .toggle_btn {

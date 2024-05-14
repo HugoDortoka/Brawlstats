@@ -21,7 +21,8 @@ function Login({ onUserLogin }) {
         });
   
         if (response.ok) {
-          localStorage.setItem('userLoggedIn', 'true');
+          const userData = await response.json();
+          localStorage.setItem('userLoggedIn', userData.tag);
           onUserLogin(); // Llama a la función onLogin
           navigate('/');
         } else {

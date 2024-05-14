@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import BrawlContainer from './BrawlContainer';
 
@@ -9,10 +9,11 @@ function Search() {
     const [brawlersData, setBrawlersData] = useState(null);
     const [battleLog, setBattleLog] = useState(null);
     const [error, setError] = useState('');
+    const detailsRef = useRef(null);
 
 
 
-    const isDataFetched = playerData !== null && playerData.name !== undefined && battleLog!==null; 
+    const isDataFetched = playerData !== null && playerData.name !== undefined && battleLog!==null && brawlersData!==null; 
     useEffect(() => {
         // Esta función se ejecuta cuando el componente se monta
         // Aquí podemos obtener la lista de brawlers
@@ -49,18 +50,23 @@ function Search() {
             setBattleLog(null);
         });
 
-
+        // Scroll a los detalles después de cargar los datos
+        setTimeout(() => {
+            detailsRef.current.scrollIntoView({ behavior: 'smooth' });
+        }, 700);
         
     }
+    
     useEffect(() => {
-
         if (battleLog) {
             battleLog.items.forEach((item, index) => {
                 var resultadoDiv = document.getElementById(`result${index}`);
-                if (item.battle.result === "victory") {
-                    resultadoDiv.style.backgroundColor = "rgb(25, 216, 0)";
-                } else {
-                    resultadoDiv.style.backgroundColor = "rgb(225, 59, 30)";
+                if (resultadoDiv != null) {
+                    if (item.battle.result === "victory") {
+                        resultadoDiv.style.backgroundColor = "rgb(25, 216, 0)";
+                    } else {
+                        resultadoDiv.style.backgroundColor = "rgb(225, 59, 30)";
+                    }
                 }
             });
         }
@@ -84,9 +90,9 @@ function Search() {
 
             {error && <div className="error">{error}</div>}
 
+            <div ref={detailsRef}></div>
             {isDataFetched && (
                 <div className="details">
-                
                     <div className='infoTable'>
                         <div className="details__item">
                             <div className="details__value"><img className='iconImg' src={`https://cdn.brawlstats.com/player-thumbnails/${playerData.icon.id}.png`} alt="Player Icon"/></div>
@@ -147,7 +153,7 @@ function Search() {
                         </div>
                
                     </div>
-                    <h1 className='titleBrawlers'>Battle Log {battleLog.items.length}</h1>
+                    <h1 className='titleBrawlers'>Battle Log</h1>
                    
                         <div className='battleContainer'>
                             {battleLog.items.map((item, index)=> (
