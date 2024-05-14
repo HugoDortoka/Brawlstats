@@ -53,21 +53,25 @@ function Register() {
       }
     };
     return (
-      <div>
-        <h1>User Register</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+      <div className="container">
+        <div className="form">
+          <div className = "divLogin">
+            <div>Register</div>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <input className="input__login" type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              </div>
+              <div>
+                <input className="input__login" type="text" id="tag" name="tag" placeholder="Player Tag" value={tag} onChange={(e) => setTag(e.target.value)} required />
+              </div>
+              <div>
+                <input className="input__login" type="password" id="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              </div>
+              <button className="submit__login" type="submit">Sing Up</button>
+            </form>
+            <Link to="/login" className="link">Log In</Link>
           </div>
-          <div>
-            <input type="text" id="tag" name="tag" placeholder="Tag" value={tag} onChange={(e) => setTag(e.target.value)} required />
-          </div>
-          <div>
-            <input type="password" id="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          </div>
-          <button type="submit">Register</button>
-        </form>
-        <Link to="/login" className="link">Log In</Link>
+        </div>
       </div>
     );
   }
