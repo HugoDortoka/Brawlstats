@@ -155,8 +155,7 @@ function Search() {
                    
                         <div className='battleContainer'>
                             {battleLog.items.map((item, index)=> (
-                                <div className='gamePlayed' id={`result${index}`}>
-                                    {console.log(item)}                                   
+                                <div className='gamePlayed' id={`result${index}`}>                                
                                     <img src={`https://cdn-old.brawlify.com/gamemode/${item.event.mode.charAt(0).toUpperCase() + item.event.mode.slice(1).replace(/([A-Z])(?=[a-z])/g, '-$1')}.png`} alt={item.event.mode}></img>
                                 </div>
                             ))}

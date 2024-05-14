@@ -358,6 +358,16 @@ header {
 }
 /* Footer */
 
+.divSponsorsFooter{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.sponsorsFooter{
+    height: 100px;
+    width: 100px;
+}
+
 .logoFooter {
     height: 80px;
     width: 100px;
@@ -386,6 +396,20 @@ footer div {
         display: grid;
         grid-template-columns: 91.66% 8.33%;
         
+    }
+}
+
+@media(max-width: 850px){
+    footer div { 
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    footer{
+        height: auto;
+    }
+    .logoFooter{
+        margin-left: 100px;
     }
 }
 /* Log In and Register */
@@ -420,4 +444,16 @@ footer div {
 .divLogin a{
     font-weight: 100;
     text-decoration: underline;
+}
+.titleLogout{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.titleLogout button{
+    border: none;
+    padding: 10px;
+    background-color:#0A73E5;
+    font-weight: 600;
+    color: white;
 }

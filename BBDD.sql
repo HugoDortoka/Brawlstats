@@ -25,10 +25,9 @@ CREATE TABLE IF NOT EXISTS sponsors (
 
 -- Insertar 4 registros en la tabla 'sponsors'
 INSERT INTO sponsors (CIF, nom, logo) VALUES
-('C12481610', 'Adidas', 'url_del_logo_1'),
-('H70914163', 'Coca Cola', 'url_del_logo_2'),
-('U14923668', 'VISA', 'url_del_logo_3'),
-('V00420471', 'MasterCard', 'url_del_logo_4');
+('H70914163', 'Coca Cola', 'cocacola.png'),
+('U14923668', 'VISA', 'visa.png'),
+('V00420471', 'MasterCard', 'mastercard.png');
 
 -- Crear la tabla 'users' con los campos 'email', 'tag' y 'password'
 CREATE TABLE IF NOT EXISTS users (
