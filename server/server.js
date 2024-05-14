@@ -58,7 +58,11 @@ app.post('/userLogin', (req, res) => {
 
     if (results.length > 0) {
       // Si hay resultados, significa que las credenciales son correctas
-      res.status(200).send('Inicio de sesión exitoso');
+      const user = results[0];
+      const userData = {
+        tag: user.tag,
+      };
+      res.send(userData);
     } else {
       // Si no hay resultados, las credenciales son incorrectas
       res.status(401).send('Credenciales incorrectas');
@@ -136,6 +140,28 @@ app.get('/playersTop/:countryCode', (req, res) => {
         // Handle error
         console.log(error);
         res.send('Players Top Not Found');
+      });
+});
+
+app.get('/brawlersTop/:countryCode/:brawlerId', (req, res) => {
+  const countryCode = req.params.countryCode;
+  const brawlerId = req.params.brawlerId;
+
+  axios({
+      method: 'get',
+      url:`https://api.brawlstars.com/v1/rankings/${countryCode}/brawlers/${brawlerId}`,
+      headers: {
+        'Authorization':` Bearer ${apiKey}`
+      }
+    })
+      .then(response => {
+        // Handle successful response
+        res.send(response.data);
+      })
+      .catch(error => {
+        // Handle error
+        console.log(error);
+        res.send('Brawlers Top Not Found');
       });
 });
 
