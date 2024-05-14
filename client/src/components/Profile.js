@@ -54,7 +54,7 @@ function Profile({ onUserLogout }) {
     
     useEffect(() => {
 
-        if (battleLog) {
+        if (isDataFetched && battleLog!==null) {
             battleLog.items.forEach((item, index) => {
                 var resultadoDiv = document.getElementById(`result${index}`);
                 if (resultadoDiv!=null) {
@@ -66,7 +66,7 @@ function Profile({ onUserLogout }) {
                 };
             });
         }
-    }, [battleLog]);
+    }, [battleLog, isDataFetched]);
 
 
     return (
