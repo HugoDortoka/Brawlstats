@@ -6,7 +6,24 @@ const axios = require('axios');
 const cors = require('cors');
 const db = require('./db');
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
 require('dotenv').config();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, path.join(__dirname, '../client/src/assets/images/'));
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// Ruta para servir las imágenes estáticas
+app.use('/images', express.static(path.join(__dirname, '../client/src/assets/images')));
 
 const port = 3000;
 
@@ -89,6 +106,35 @@ app.post('/sponsors', (req, res) => {
   });
 });
 
+app.post('/sponsors/:CIF', (req, res) => {
+  const { CIF } = req.params;
+  
+  db.query('SELECT logo FROM sponsors WHERE CIF = ?', [CIF], (err, results) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta:', err);
+      res.status(500).send('Error interno del servidor');
+      return;
+    }
+
+    if (results.length > 0) {
+      // Si hay resultados, significa que las credenciales son correctas
+      const logo = results[0].logo;
+      const imagePath = path.join(__dirname, '..', 'client', 'src', 'assets', 'images', logo);
+      fs.unlink(imagePath, (unlinkErr) => {
+        if (unlinkErr) {
+          console.error('Error al eliminar la imagen:', unlinkErr);
+          res.status(500).send('Error interno del servidor al eliminar la imagen');
+          return;
+        }
+        res.send(`Imagen ${logo} eliminada correctamente`);
+      });
+    } else {
+      // Si no hay resultados, las credenciales son incorrectas
+      res.status(401).send('Credenciales incorrectas');
+    }
+  });
+});
+
 app.delete('/sponsors/:CIF', (req, res) => {
   const { CIF } = req.params;
 
@@ -107,27 +153,53 @@ app.delete('/sponsors/:CIF', (req, res) => {
   });
 });
 
-app.put('/sponsors/:CIF', (req, res) => {
+app.put('/sponsors/:CIF', upload.single('logo'), (req, res) => {
   const { CIF } = req.params;
   const { nom } = req.body;
+  let logoFilename = req.file ? req.file.originalname : null;
 
-  db.query(
-    'UPDATE sponsors SET nom = ? WHERE CIF = ?',
-    [nom, CIF],
-    (err, results) => {
-      if (err) {
-        console.error('Error al ejecutar la consulta de edición:', err);
+  let query;
+  let params;
+  if (logoFilename) {
+    query = 'UPDATE sponsors SET nom = ?, logo = ? WHERE CIF = ?';
+    params = [nom, logoFilename, CIF];
+  } else {
+    query = 'UPDATE sponsors SET nom = ? WHERE CIF = ?';
+    params = [nom, CIF];
+  }
+
+  // Primero, obtener el sponsor actual para borrar el archivo antiguo si hay uno nuevo
+  db.query('SELECT logo FROM sponsors WHERE CIF = ?', [CIF], (err, results) => {
+    if (err) {
+        console.error('Error al obtener el sponsor:', err);
         res.status(500).send('Error interno del servidor');
         return;
-      }
-
-      if (results.affectedRows > 0) {
-        res.status(200).send({ CIF, nom });
-      } else {
-        res.status(404).send({ error: 'Sponsor no encontrado' });
-      }
     }
-  );
+
+    const oldLogoPath = results[0] && results[0].logo ? path.join(__dirname, '../client/src/assets/images', results[0].logo) : null;
+
+    db.query(query, params, (err, results) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta de edición:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+
+        if (results.affectedRows > 0) {
+            if (logoFilename && oldLogoPath) {
+                // Borrar el archivo antiguo
+                fs.unlink(oldLogoPath, (err) => {
+                    if (err) {
+                        console.error('Error al borrar el archivo antiguo:', err);
+                    }
+                });
+            }
+            res.status(200).send({ CIF, nom, logo: logoFilename });
+        } else {
+            res.status(404).send({ error: 'Sponsor no encontrado' });
+        }
+    });
+  });
 });
 
 app.post('/register', (req, res) => {

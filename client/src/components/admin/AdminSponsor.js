@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 function AdminSponsor({ onAdminLogout }) {
     const [sponsors, setSponsors] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
-    const [currentSponsor, setCurrentSponsor] = useState({ CIF: '', nom: '' });
+    const [currentSponsor, setCurrentSponsor] = useState({ CIF: '', nom: '', logo: '' });
+    const [newLogo, setNewLogo] = useState(null);
     
     const navigate = useNavigate();
     useEffect(() => {
@@ -35,7 +36,14 @@ function AdminSponsor({ onAdminLogout }) {
         setCurrentSponsor(sponsor);
     };
 
-    const handleDeleteClick = (CIF, imageName) => {
+    const handleDeleteClick = (CIF) => {
+        fetch(`http://localhost:3000/sponsors/${CIF}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+        })
+
         fetch(`http://localhost:3000/sponsors/${CIF}`, {
             method: 'DELETE',
         })
@@ -43,7 +51,6 @@ function AdminSponsor({ onAdminLogout }) {
                 if (!response.ok) {
                     throw new Error('No se pudo completar la solicitud de eliminación');
                 }
-                deleteLocalImage(imageName);
                 setSponsors(sponsors.filter(sponsor => sponsor.CIF !== CIF));
             })
             .catch(error => {
@@ -51,29 +58,18 @@ function AdminSponsor({ onAdminLogout }) {
             });
     };
 
-    const deleteLocalImage = (imageName) => {
-        const imagePath = `client/src/assets/images/${imageName}`;
-        fetch(imagePath, {
-            method: 'DELETE',
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('No se pudo eliminar la imagen localmente');
-            }
-            console.log('Imagen eliminada');
-        })
-        .catch(error => {
-            console.error('Error deleting image:', error);
-        });
-    };
-
     const handleSaveEdit = () => {
+        const formData = new FormData();
+        formData.append('CIF', currentSponsor.CIF);
+        formData.append('nom', currentSponsor.nom);
+
+        if (newLogo) {
+            formData.append('logo', newLogo);
+        }
+
         fetch(`http://localhost:3000/sponsors/${currentSponsor.CIF}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(currentSponsor)
+            body: formData
         })
             .then(response => {
                 if (!response.ok) {
@@ -86,7 +82,8 @@ function AdminSponsor({ onAdminLogout }) {
                     sponsor.CIF === updatedSponsor.CIF ? updatedSponsor : sponsor
                 ));
                 setIsEditing(false);
-                setCurrentSponsor({ CIF: '', nom: '' });
+                setCurrentSponsor({ CIF: '', nom: '', logo: '' });
+                setNewLogo(null);
             })
             .catch(error => {
                 console.error('Error updating sponsor:', error);
@@ -96,6 +93,10 @@ function AdminSponsor({ onAdminLogout }) {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setCurrentSponsor({ ...currentSponsor, [name]: value });
+    };
+
+    const handleFileChange = (e) => {
+        setNewLogo(e.target.files[0]);
     };
 
     return (
@@ -123,7 +124,7 @@ function AdminSponsor({ onAdminLogout }) {
                                 <button onClick={() => handleEditClick(sponsor)}>Editar</button>
                             </td>
                             <td>
-                                <button onClick={() => handleDeleteClick(sponsor.CIF, sponsor.logo)}>Eliminar</button>
+                                <button onClick={() => handleDeleteClick(sponsor.CIF)}>Eliminar</button>
                             </td>
                         </tr>
                     ))}
@@ -150,6 +151,14 @@ function AdminSponsor({ onAdminLogout }) {
                                 name="nom"
                                 value={currentSponsor.nom}
                                 onChange={handleInputChange}
+                            />
+                        </label>
+                        <label>
+                            Logo:
+                            <input
+                                type="file"
+                                name="logo"
+                                onChange={handleFileChange}
                             />
                         </label>
                         <button type="button" onClick={handleSaveEdit}>Save</button>
