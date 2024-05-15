@@ -89,6 +89,47 @@ app.post('/sponsors', (req, res) => {
   });
 });
 
+app.delete('/sponsors/:CIF', (req, res) => {
+  const { CIF } = req.params;
+
+  db.query('DELETE FROM sponsors WHERE CIF = ?', [CIF], (err, results) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta de eliminación:', err);
+      res.status(500).send('Error interno del servidor');
+      return;
+    }
+
+    if (results.affectedRows > 0) {
+      res.status(200).send({ message: 'Sponsor eliminado correctamente' });
+    } else {
+      res.status(404).send({ error: 'Sponsor no encontrado' });
+    }
+  });
+});
+
+app.put('/sponsors/:CIF', (req, res) => {
+  const { CIF } = req.params;
+  const { nom } = req.body;
+
+  db.query(
+    'UPDATE sponsors SET nom = ? WHERE CIF = ?',
+    [nom, CIF],
+    (err, results) => {
+      if (err) {
+        console.error('Error al ejecutar la consulta de edición:', err);
+        res.status(500).send('Error interno del servidor');
+        return;
+      }
+
+      if (results.affectedRows > 0) {
+        res.status(200).send({ CIF, nom });
+      } else {
+        res.status(404).send({ error: 'Sponsor no encontrado' });
+      }
+    }
+  );
+});
+
 app.post('/register', (req, res) => {
   const { email, tag, password } = req.body;
 
