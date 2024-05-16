@@ -32,17 +32,21 @@ function AdminLogin({ onAdminLogin }) {
   };
 
   return (
-    <div>
-      <h1>Admin Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+    <div className='container'>
+      <div className="form3">
+        <div className = "divLogin">
+          <div>Admin Log In</div>
+          <form  onSubmit={handleSubmit}>
+            <div>
+              <input className="input__login" type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+            <div>
+              <input className="input__login" type="password" id="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </div>
+            <button className="submit__login" type="submit">Log In</button>
+          </form>
         </div>
-        <div>
-          <input type="password" id="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <button type="submit">Log In</button>
-      </form>
+      </div>
     </div>
   );
 }

@@ -413,11 +413,24 @@ footer div {
     }
 }
 /* Log In and Register */
+.form3 {
+    min-height: 90vh;
+    background: url(../assets/images/front-bg-small.f14153.jpg) 0/cover;
+    display: grid;
+    place-content: center;
 
+}
+.form3 > div:first-child {
+    color: white;
+    font-weight: bold;
+    font-size: 44px;
+    width: 450px;
+    margin-bottom: 20px;
+}
 .divLogin{
     text-align: center;
     color: #0A73E5 !important;
-    width: 550px !important;
+    width: 550px ;
     padding: 40px;
     background-color: #F2F2F2;
 }
@@ -457,7 +470,20 @@ footer div {
     font-weight: 600;
     color: white;
 }
-
+@media(max-width: 850px){
+    .divLogin{
+        width: auto; 
+    }
+    .form3 > div:first-child {
+        width: auto;
+    }
+    .input__login {
+        width: 300px;
+    }
+    .submit__login {
+        width: 300px;
+    }
+}
 /* TOP */
 .form2{
     display: grid;
@@ -466,6 +492,7 @@ footer div {
 }
 .containTop{
     margin-top: 80px;
+    min-height: 100vh;
     max-width: 1200px;
     background-color: white;
     display: grid;
@@ -521,3 +548,5 @@ footer div {
         padding: 0;
     }
 }
+
+
