@@ -58,7 +58,7 @@ function Profile({ onUserLogout }) {
             battleLog.items.forEach((item, index) => {
                 var resultadoDiv = document.getElementById(`result${index}`);
                 if (resultadoDiv!=null) {
-                    if (item.battle.result === "victory") {
+                    if (item.battle.result === "victory" || item.battle.rank<=4) {
                         resultadoDiv.style.backgroundColor = "rgb(25, 216, 0)";
                     } else {
                         resultadoDiv.style.backgroundColor = "rgb(225, 59, 30)";
@@ -146,15 +146,14 @@ function Profile({ onUserLogout }) {
                     </div>
                     <h1 className='titleBrawlers'>Battle Log</h1>
                    
-                        <div className='battleContainer'>
-                            {battleLog.items.map((item, index)=> (
-                                <div className='gamePlayed' id={`result${index}`}>
-                                    {console.log(item)}                                   
-                                    <img src={`https://cdn-old.brawlify.com/gamemode/${item.event.mode.charAt(0).toUpperCase() + item.event.mode.slice(1).replace(/([A-Z])(?=[a-z])/g, '-$1')}.png`} alt={item.event.mode}></img>
-                                </div>
-                            ))}
-                        </div>
-                    <h3>Last {battleLog.items.length} games - Victories: {battleLog.items.filter(item => item.battle.result === "victory").length} | Defeats: {battleLog.items.filter(item => item.battle.result === "defeat").length}</h3>
+                    <div className='battleContainer'>
+                        {battleLog.items.map((item, index)=> (
+                            <div className='gamePlayed' id={`result${index}`}>                             
+                                <img src={`https://cdn-old.brawlify.com/gamemode/${item.battle.mode.charAt(0).toUpperCase() + item.battle.mode.slice(1).replace(/([A-Z])(?=[a-z])/g, '-$1')}.png`} alt={item.battle.mode}></img>
+                            </div>
+                        ))}
+                    </div>
+                    <h3>Last {battleLog.items.length} games - Victories: {battleLog.items.filter(item => item.battle.result === "victory").length+battleLog.items.filter(item => item.battle.rank <=4).length} | Defeats: {battleLog.items.filter(item => item.battle.result === "defeat").length+battleLog.items.filter(item => item.battle.rank > 4).length}</h3>
 
                     <h1 className='titleBrawlers'>Brawlers ({playerData.brawlers.length}/{brawlersData.items.length})</h1>
                     <div className='brawlersContainer'>

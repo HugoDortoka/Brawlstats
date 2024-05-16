@@ -62,7 +62,7 @@ function Search() {
             battleLog.items.forEach((item, index) => {
                 var resultadoDiv = document.getElementById(`result${index}`);
                 if (resultadoDiv != null) {
-                    if (item.battle.result === "victory") {
+                    if (item.battle.result === "victory" || item.battle.rank<=4) {
                         resultadoDiv.style.backgroundColor = "rgb(25, 216, 0)";
                     } else {
                         resultadoDiv.style.backgroundColor = "rgb(225, 59, 30)";
@@ -160,7 +160,7 @@ function Search() {
                                 </div>
                             ))}
                         </div>
-                    <h3>Last {battleLog.items.length} games - Victories: {battleLog.items.filter(item => item.battle.result === "victory").length} | Defeats: {battleLog.items.filter(item => item.battle.result === "defeat").length}</h3>
+                    <h3>Last {battleLog.items.length} games - Victories: {battleLog.items.filter(item => item.battle.result === "victory").length+battleLog.items.filter(item => item.battle.rank <=4).length} | Defeats: {battleLog.items.filter(item => item.battle.result === "defeat").length+battleLog.items.filter(item => item.battle.rank > 4).length}</h3>
 
                     <h1 className='titleBrawlers'>Brawlers ({playerData.brawlers.length}/{brawlersData.items.length})</h1>
                     <div className='brawlersContainer'>
