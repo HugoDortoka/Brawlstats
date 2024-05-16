@@ -202,6 +202,44 @@ app.put('/sponsors/:CIF', upload.single('logo'), (req, res) => {
   });
 });
 
+app.post('/newSponsor', upload.single('logo'), (req, res) => {
+  const { CIF, name } = req.body;
+  const logoFilename = req.file ? req.file.originalname : null;
+
+  if (!logoFilename) {
+    res.status(400).send('El logo es obligatorio');
+    return;
+  }
+
+  // Verifica si el CIF ya está registrado
+  db.query('SELECT * FROM sponsors WHERE CIF = ?', [CIF], (err, results) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta:', err);
+      res.status(500).send('Error interno del servidor');
+      return;
+    }
+
+    if (results.length > 0) {
+      // El CIF ya está registrado
+      res.status(400).send('El CIF ya está registrado');
+    } else {
+      // El CIF no está registrado, procede con el registro
+
+      // Inserta el nuevo sponsor en la base de datos
+      db.query('INSERT INTO sponsors (CIF, nom, logo) VALUES (?, ?, ?)', [CIF, name, logoFilename], (err, results) => {
+        if (err) {
+          console.error('Error al ejecutar la consulta de inserción:', err);
+          res.status(500).send('Error interno del servidor');
+          return;
+        }
+
+        // Registro exitoso
+        res.status(201).send('Registro exitoso');
+      });
+    }
+  });
+});
+
 app.post('/register', (req, res) => {
   const { email, tag, password } = req.body;
 
@@ -294,6 +332,28 @@ app.get('/brawlersTop/:countryCode/:brawlerId', (req, res) => {
         // Handle error
         console.log(error);
         res.send('Brawlers Top Not Found');
+      });
+});
+
+app.get('/club/:clubTag', (req, res) => {
+  const clubTag = req.params.clubTag;
+
+
+  axios({
+      method: 'get',
+      url: `https://api.brawlstars.com/v1/clubs/%23${clubTag}`,
+      headers: {
+        'Authorization': `Bearer ${apiKey}`
+      }
+    })
+      .then(response => {
+        // Handle successful response
+        res.send(response.data);
+      })
+      .catch(error => {
+        // Handle error
+        console.log(error);
+        res.send('Club Not Found');
       });
 });
 

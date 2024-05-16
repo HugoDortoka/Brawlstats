@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminHome from './components/admin/AdminHome';
 import AdminSponsor from './components/admin/AdminSponsor';
+import AdminNewSponsor from './components/admin/AdminNewSponsor';
 import NotFound from './components/NotFound';
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
           <Route path='adminLogin' element={<AdminLogin onAdminLogin={handleAdminLogin} />} />
           <Route path='adminHome' element={adminLoggedIn ? <AdminHome onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
           <Route path='adminSponsor' element={adminLoggedIn ? <AdminSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
+          <Route path='adminNewSponsor' element={adminLoggedIn ? <AdminNewSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
           <Route path='*' element={<NotFound />} />
        </Routes>
        <Footer />

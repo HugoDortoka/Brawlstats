@@ -8,6 +8,7 @@ function AdminSponsor({ onAdminLogout }) {
     const [newLogo, setNewLogo] = useState(null);
     
     const navigate = useNavigate();
+
     useEffect(() => {
         fetch('http://localhost:3000/sponsors', {
           method: 'POST',
@@ -99,6 +100,10 @@ function AdminSponsor({ onAdminLogout }) {
         setNewLogo(e.target.files[0]);
     };
 
+    const handleRedirectNewSponsor = () => {
+        navigate('/adminNewSponsor');
+    };
+
     return (
         <div>
             <h1>Admin Sponsor</h1>
@@ -106,6 +111,7 @@ function AdminSponsor({ onAdminLogout }) {
                 onAdminLogout(); // Llama a la función onLogout
                 navigate('/adminLogin');
             }}>Cerrar sesión</button>
+            <button onClick={handleRedirectNewSponsor}>New Sponsor</button>
             <table>
                 <thead>
                     <tr>
@@ -133,7 +139,7 @@ function AdminSponsor({ onAdminLogout }) {
             {isEditing && (
                 <div>
                     <h2>Edit Sponsor</h2>
-                    <form onSubmit={handleSaveEdit}>
+                    <form>
                         <label>
                             CIF:
                             <input
