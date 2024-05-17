@@ -87,6 +87,25 @@ app.post('/userLogin', (req, res) => {
   });
 });
 
+app.post('/allTags', (req, res) => {
+  // Realiza la validación de credenciales en tu base de datos
+  db.query('SELECT tag FROM users', (err, results) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta:', err);
+      res.status(500).send('Error interno del servidor');
+      return;
+    }
+
+    if (results.length > 0) {
+      // Si hay resultados, significa que las credenciales son correctas
+      res.send(results);
+    } else {
+      // Si no hay resultados, las credenciales son incorrectas
+      res.status(401).send('Credenciales incorrectas');
+    }
+  });
+});
+
 app.post('/sponsors', (req, res) => {
   // Realiza la validación de credenciales en tu base de datos
   db.query('SELECT * FROM sponsors', (err, results) => {
