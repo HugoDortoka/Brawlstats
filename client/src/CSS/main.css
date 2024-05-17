@@ -214,6 +214,7 @@ header {
 .columnaInfo div {
     font-size: 18px;
     font-weight: 600;
+    align-content:  center;
 }
 .filaInfo > div:first-child {
     margin-right: 20px;
@@ -535,12 +536,30 @@ footer div {
 .topPlayers > div:first-child{
     font-weight: bold;
 }
-
+.topPlayersClub{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 5fr 6fr 2fr;
+    margin-top: 10px;
+    background-color: #0A73E5;
+    border: #000000 1px solid;
+    padding: 20px;
+    font-weight: bold;
+    color: white;
+}
+.topPlayersClub div img {
+    width: 36px;
+    height: 36px;
+}
 @media(max-width: 850px){
     .containTop{
         grid-template-columns: 1fr;
     }
     .topPlayers{
+        padding: 5px;
+        grid-template-columns: 1fr 6fr 5fr 2fr;
+    }
+    .topPlayersClub{
         padding: 5px;
         grid-template-columns: 1fr 6fr 5fr 2fr;
     }

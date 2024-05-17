@@ -55,6 +55,41 @@ function Wiki() {
             <div ref={detailsRef}></div>
             {isDataFetched && (
                 <div className="details">
+                    <div className='infoTable'>
+                        <div className="details__item">
+                            <div className="details__value"><img className='iconImg' src="https://cdn.brawlstats.com/club-badges/clan_badge_06_04.png" alt="Player Icon"/></div>
+                            <div>
+                                <div className="details__name">{clubData.name}</div>
+                
+                                <div className="details__club"><img className='clubImg' src="https://cdn-old.brawlify.com/icon/trophy.png"></img>{clubData.trophies}</div>
+                            </div>
+                            <div className="details__tag">{clubData.tag}</div>                        
+                        </div>
+                        <div className='descriptionClub'>{clubData.description}</div>
+                        <div className='filaInfo'>
+                            <div className='columnaInfo'>
+                                <img src="https://cdn-old.brawlify.com/icon/trophy.png"></img>
+                                <div>Required Trophies</div>
+                                <div>{clubData.requiredTrophies}</div>
+                            </div>
+                            <div className='columnaInfo'>
+                                <img src="https://cdn-old.brawlify.com/icon/Unlocked.png"></img>
+                                <div>Type</div>
+                                <div>{clubData.type}</div>
+                            </div>
+                        </div>
+                        <div className='containPlayers'>
+                            {clubData.members.map((member, index) => (
+                                <div className='topPlayersClub'>
+                                    <div>{index+1}</div>
+                                    <div>{member.name}</div>
+                                    <div>{member.role}</div>
+                                    <div className='imgTrophie'><img src="https://brawlstats.com/dist/trophy.96ebb0874d0e7e7a7c235bfbb751f2cf.png"></img>{member.trophies}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
 
                         {console.log(clubData)}
                 </div>
