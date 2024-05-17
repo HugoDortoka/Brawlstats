@@ -81,7 +81,7 @@ function Profile({ onUserLogout }) {
                         <button onClick={() => {
                             onUserLogout(); // Llama a la función onLogout
                             navigate('/');
-                        }}>Cerrar sesión</button>
+                        }}>Log Out</button>
                     </div>
 
                     <div className='infoTable'>

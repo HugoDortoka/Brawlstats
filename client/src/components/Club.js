@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 
 
-function Wiki() {
+function Club() {
     const [clubTag, setClubTag] = useState('');
     const [clubData, setClubData] = useState(null);
     const [error, setError] = useState('');
@@ -30,7 +30,7 @@ function Wiki() {
         // Scroll a los detalles después de cargar los datos
         setTimeout(() => {
             detailsRef.current.scrollIntoView({ behavior: 'smooth' });
-        }, 700);
+        }, 1000);
         
     }
     
@@ -98,4 +98,4 @@ function Wiki() {
   );
 }
 
-export default Wiki;
+export default Club;

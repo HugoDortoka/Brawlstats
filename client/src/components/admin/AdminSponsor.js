@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function AdminSponsor({ onAdminLogout }) {
@@ -96,6 +96,7 @@ function AdminSponsor({ onAdminLogout }) {
         setCurrentSponsor({ ...currentSponsor, [name]: value });
     };
 
+
     const handleFileChange = (e) => {
         setNewLogo(e.target.files[0]);
     };
@@ -105,73 +106,74 @@ function AdminSponsor({ onAdminLogout }) {
     };
 
     return (
-        <div>
-            <h1>Admin Sponsor</h1>
-            <button onClick={() => {
-                onAdminLogout(); // Llama a la función onLogout
-                navigate('/adminLogin');
-            }}>Cerrar sesión</button>
-            <button onClick={handleRedirectNewSponsor}>New Sponsor</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>CIF</th>
-                        <th>Name</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sponsors.map(sponsor => (
+        <div className='containerAdmin'>
+            <div className='details'>
+                <h1 className='titleAdminSponsors'>Admin Sponsor</h1>
+                <button className='buttonAdminSponsors' onClick={handleRedirectNewSponsor}>New Sponsor</button>
+                <table className='tableSponsors'>
+                    <thead>
                         <tr>
-                            <td>{sponsor.CIF}</td>
-                            <td>{sponsor.nom}</td>
-                            <td>
-                                <button onClick={() => handleEditClick(sponsor)}>Editar</button>
-                            </td>
-                            <td>
-                                <button onClick={() => handleDeleteClick(sponsor.CIF)}>Eliminar</button>
-                            </td>
+                            <th>CIF</th>
+                            <th>Name</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            {isEditing && (
-                <div>
-                    <h2>Edit Sponsor</h2>
-                    <form>
-                        <label>
-                            CIF:
-                            <input
-                                type="text"
-                                name="CIF"
-                                value={currentSponsor.CIF}
-                                onChange={handleInputChange}
-                                disabled
-                            />
-                        </label>
-                        <label>
-                            Name:
-                            <input
-                                type="text"
-                                name="nom"
-                                value={currentSponsor.nom}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <label>
-                            Logo:
-                            <input
-                                type="file"
-                                name="logo"
-                                onChange={handleFileChange}
-                            />
-                        </label>
-                        <button type="button" onClick={handleSaveEdit}>Save</button>
-                        <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
-                    </form>
-                </div>
-            )}
+                    </thead>
+                    <tbody>
+                        {sponsors.map(sponsor => (
+                            <tr>
+                                <td>{sponsor.CIF}</td>
+                                <td>{sponsor.nom}</td>
+                                <td>
+                                    <button className='buttonAdminSponsors2' onClick={() => handleEditClick(sponsor)}>Edit</button>
+                                </td>
+                                <td>
+                                    <button className='buttonAdminSponsors2' onClick={() => handleDeleteClick(sponsor.CIF)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                {isEditing && (
+                    <div>
+                        <h2 className='titleAdminSponsors'>Edit Sponsor</h2>
+                        <form>
+                            <label>
+                                CIF:
+                                <input
+                                    type="text"
+                                    name="CIF"
+                                    value={currentSponsor.CIF}
+                                    onChange={handleInputChange}
+                                    disabled
+                                />
+                            </label>
+                            <label>
+                                Name:
+                                <input
+                                    type="text"
+                                    name="nom"
+                                    value={currentSponsor.nom}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                            <label className='changeLogo'>
+                                Change Logo
+   
+                                <input
+                                    type="file"
+                                    name="logo"
+                                    className="file-input"
+                                    
+                                    onChange={handleFileChange}
+                                />
+                            </label>
+                            <button className='buttonAdminSponsors' type="button" onClick={handleSaveEdit}>Save</button>
+                            <button className='buttonAdminSponsors' type="button" onClick={() => setIsEditing(false)}>Cancel</button>
+                        </form>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

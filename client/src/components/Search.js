@@ -53,7 +53,7 @@ function Search() {
         // Scroll a los detalles después de cargar los datos
         setTimeout(() => {
             detailsRef.current.scrollIntoView({ behavior: 'smooth' });
-        }, 700);
+        }, 1000);
         
     }
     

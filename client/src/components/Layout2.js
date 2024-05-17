@@ -1,10 +1,13 @@
 import { Outlet } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../CSS/main.css';
 
-function Layout({ userLogged }) {
+function Layout2({ onAdminLogout }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const toggleBtn = document.querySelector('.toggle_btn');
@@ -27,15 +30,16 @@ function Layout({ userLogged }) {
           <div className="logo"><Link to="/" className="logo">Brawl Stats</Link></div>
         
           <ul className="links">
-            <li><Link to="/" className="link">Search</Link></li>
-            <li><Link to="/club" className="link">Club</Link></li>
-            <li><Link to="/top" className="link">Top</Link></li>
+            <li><Link to="/adminHome" className="link">Statistics</Link></li>
+            <li><Link to="/adminSponsor" className="link">Sponsors</Link></li>
           </ul>
-          {userLogged === 'true' ? (
-            <Link to="/profile" className="action_btn">Profile</Link>
-          ) : (
-            <Link to="/login" className="action_btn">Log In</Link>
-          )}
+          
+          <Link to="/adminSponsor" className="action_btn" onClick={() => {
+                onAdminLogout(); // Llama a la función onLogout
+                navigate('/adminLogin');
+            }}>Log Out
+          </Link>
+
           <div className="toggle_btn">
             {isOpen ? (
               <img className="menu" src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3e%3cline x1='1' y1='1' x2='23' y2='23' stroke='%23000' stroke-width='2'/%3e%3cline x1='23' y1='1' x2='1' y2='23' stroke='%23000' stroke-width='2'/%3e%3c/svg%3e"></img>
@@ -45,10 +49,16 @@ function Layout({ userLogged }) {
           </div>
         </div>
         <div className={`dropdown_menu ${isOpen ? 'open' : ''}`}>
-          <li><Link to="/" className="link">Search</Link></li>
-          <li><Link to="/Club" className="link">Club</Link></li>
-          <li><Link to="/top" className="link">Top</Link></li>
-          <li><Link to="/login" className="action_btn">Log In</Link></li>
+          <li><Link to="/adminHome" className="link">Statistics</Link></li>
+          <li><Link to="/adminSponsor" className="link">Sponsors</Link></li>
+     
+          <li>
+            <Link to="/adminSponsor" className="action_btn" onClick={() => {
+                onAdminLogout(); // Llama a la función onLogout
+                navigate('/adminLogin');
+            }}>Log Out
+            </Link>
+          </li>
         </div>
       </header>
 
@@ -57,4 +67,4 @@ function Layout({ userLogged }) {
   );
 }
 
-export default Layout;
+export default Layout2;

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
+import Layout2 from './components/Layout2';
 import Search from './components/Search';
-import Wiki from './components/Wiki';
+import Wiki from './components/Club';
 import Top from './components/Top';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -13,6 +14,10 @@ import AdminHome from './components/admin/AdminHome';
 import AdminSponsor from './components/admin/AdminSponsor';
 import AdminNewSponsor from './components/admin/AdminNewSponsor';
 import NotFound from './components/NotFound';
+
+// src/index.js o src/App.js
+import './assets/fonts/fonts.css';
+import Club from './components/Club';
 
 function App() {
   const [adminLoggedIn, setAdminLoggedIn] = useState(
@@ -46,16 +51,18 @@ function App() {
        <Routes>
           <Route path='/' element={userLoggedIn ? <Layout userLogged='true'/> : <Layout userLogged='false'/>}>
             <Route path='/' element={<Search />} />
-            <Route path='wiki' element={<Wiki />} />
+            <Route path='club' element={<Club />} />
             <Route path='top' element={<Top />} />
             <Route path='login' element={<Login onUserLogin={handleUserLogin} />} />
             <Route path='profile' element={userLoggedIn ? <Profile onUserLogout={handleUserLogout} /> : <Navigate to="/" />} />
             <Route path='register' element={<Register />} />
           </Route>
           <Route path='adminLogin' element={<AdminLogin onAdminLogin={handleAdminLogin} />} />
-          <Route path='adminHome' element={adminLoggedIn ? <AdminHome onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
-          <Route path='adminSponsor' element={adminLoggedIn ? <AdminSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
-          <Route path='adminNewSponsor' element={adminLoggedIn ? <AdminNewSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
+          <Route path='/' element={<Layout2  onAdminLogout={handleAdminLogout} />}>
+            <Route path='adminHome' element={adminLoggedIn ? <AdminHome onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
+            <Route path='adminSponsor' element={adminLoggedIn ? <AdminSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
+            <Route path='adminNewSponsor' element={adminLoggedIn ? <AdminNewSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
+          </Route>
           <Route path='*' element={<NotFound />} />
        </Routes>
        <Footer />

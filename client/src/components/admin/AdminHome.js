@@ -148,14 +148,13 @@ function AdminHome({ onAdminLogout }) {
     };
 
     return (
-        <div>
-            <h1>Admin Home</h1>
-            <button onClick={() => {
-                onAdminLogout(); // Llama a la función onLogout
-                navigate('/adminLogin');
-            }}>Cerrar sesión</button>
-            <div>
-                <Bar data={data} options={options} />
+        <div className='containerAdmin'>
+            <div className='details'>
+                <h1 className='divLogin'>Average Statistics of our Users</h1>
+    
+                <div className='graphic'>
+                    <Bar data={data} options={options} />
+                </div>
             </div>
         </div>
     );

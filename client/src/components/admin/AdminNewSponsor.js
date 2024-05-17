@@ -55,46 +55,45 @@ function AdminNewSponsor({ onAdminLogout }) {
     };
 
     return (
-        <div>
-            <h1>Admin New Sponsor</h1>
-            <button onClick={() => {
-                onAdminLogout(); // Llama a la función onLogout
-                navigate('/adminLogin');
-            }}>Cerrar sesión</button>
-            <form>
-                <label>
-                    CIF:
-                    <input
-                        type="text"
-                        name="CIF"
-                        value={cif}
-                        onChange={(e) => setCif(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Name:
-                    <input
-                        type="text"
-                        name="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Logo:
-                    <input
-                        type="file"
-                        name="logo"
-                        onChange={(e) => setLogo(e.target.files[0])}
-                        required
-                    />
-                </label>
-                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                <button type="button" onClick={handleSaveSponsor}>Save</button>
-                <button type="button" onClick={handleRedirectSponsor}>Cancel</button>
-            </form>
+        <div className='containerAdmin'>
+            <div className='details'>
+            <h1 className='titleAdminSponsors'>New Sponsor</h1>
+
+                <form>
+                    <label>
+                        CIF:
+                        <input
+                            type="text"
+                            name="CIF"
+                            value={cif}
+                            onChange={(e) => setCif(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Name:
+                        <input
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Logo:
+                        <input
+                            type="file"
+                            name="logo"
+                            onChange={(e) => setLogo(e.target.files[0])}
+                            required
+                        />
+                    </label>
+                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                    <button className='buttonAdminSponsors' type="button" onClick={handleSaveSponsor}>Save</button>
+                    <button className='buttonAdminSponsors' type="button" onClick={handleRedirectSponsor}>Cancel</button>
+                </form>
+            </div>
         </div>
     );
 }

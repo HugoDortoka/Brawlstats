@@ -1,8 +1,7 @@
 *{
     margin: 0;
-    padding: 0;
-    
-    
+    padding: 0; 
+    font-family: 'ProximaNova-Regular', sans-serif;
 }
 
 body{
@@ -346,6 +345,7 @@ header {
 }
 .nameBrawl {
  font-weight: 600;
+ font-size: 14px;
 }
 @media(max-width: 850px){
     .brawlersContainer { 
@@ -568,4 +568,78 @@ footer div {
     }
 }
 
+/* Admin */
 
+.titleAdminSponsors{
+    text-align: left;
+    color: #0A73E5 !important;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #F2F2F2;
+}
+.buttonAdminSponsors{
+    border: none;
+    padding: 10px;
+    background-color:#0A73E5;
+    font-weight: 600;
+    color: white;
+    margin-right: 10px;
+}
+.buttonAdminSponsors2{
+    border: none;
+    width: 100%;
+    padding: 10px;
+    background-color:#0A73E5;
+    font-weight: 600;
+    color: white;
+}
+.tableSponsors{
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    
+}
+.tableSponsors td{
+    text-align: center;
+    padding: 20px;
+}
+.tableSponsors th {
+    font-size: 20px;
+}
+.tableSponsors tr {
+    background-color:#ffffff ;
+}
+.containerAdmin{
+    min-height: 90vh;
+}
+.graphic{
+    margin-bottom: 40px;
+}
+
+.containerAdmin input{
+    padding: 5px;
+    margin-right: 10px;
+}
+
+  
+.file-input {
+    display: none;
+}
+.changeLogo{
+    border: none;
+    width: 100%;
+    padding: 10px;
+    background-color:#0A73E5;
+    font-weight: 600;
+    color: white;
+    font-size: 13.33px;
+    margin-right: 10px;
+} 
+
+
+@media(max-width: 850px){
+    .tableSponsors td{
+        text-align: center;
+        padding: 5px;
+    }
+}
