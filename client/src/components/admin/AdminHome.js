@@ -1,6 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Chart, registerables } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+Chart.register(...registerables);
 
 function AdminHome({ onAdminLogout }) {
     const [tags, setTags] = useState([]);
@@ -79,11 +83,11 @@ function AdminHome({ onAdminLogout }) {
                 wins3vs3M += player;
             });
 
-            trophiesM = Math.round(trophiesM/2);
-            levelM = Math.round(levelM/2);
-            soloWinsM = Math.round(soloWinsM/2);
-            duoWinsM = Math.round(duoWinsM/2);
-            wins3vs3M = Math.round(wins3vs3M/2);
+            trophiesM = Math.round(trophiesM/tags.length);
+            levelM = Math.round(levelM/tags.length);
+            soloWinsM = Math.round(soloWinsM/tags.length);
+            duoWinsM = Math.round(duoWinsM/tags.length);
+            wins3vs3M = Math.round(wins3vs3M/tags.length);
 
             setTrophiesMedia(trophiesM);
             setLevelMedia(levelM);
@@ -118,33 +122,41 @@ function AdminHome({ onAdminLogout }) {
         }
     }
 
+    const data = {
+        labels: ['Trophies', 'Level', 'Solo Wins', 'Duo Wins', '3vs3 Wins'],
+        datasets: [
+            {
+                data: [trophiesMedia, levelMedia, soloWinsMedia, duoWinsMedia, wins3vs3Media],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const options = {
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    };
+
     return (
         <div>
             <h1>Admin Home</h1>
-            <div>
-                <div>Trophies Media</div>
-                <div>{trophiesMedia}</div>
-            </div>
-            <div>
-                <div>Level Media</div>
-                <div>{levelMedia}</div>
-            </div>
-            <div>
-                <div>Solo Wins Media</div>
-                <div>{soloWinsMedia}</div>
-            </div>
-            <div>
-                <div>Duo Wins Media</div>
-                <div>{duoWinsMedia}</div>
-            </div>
-            <div>
-                <div>3vs3 Wins Media</div>
-                <div>{wins3vs3Media}</div>
-            </div>
             <button onClick={() => {
                 onAdminLogout(); // Llama a la función onLogout
                 navigate('/adminLogin');
             }}>Cerrar sesión</button>
+            <div>
+                <Bar data={data} options={options} />
+            </div>
         </div>
     );
 }
