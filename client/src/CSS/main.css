@@ -435,6 +435,14 @@ footer div {
     padding: 40px;
     background-color: #F2F2F2;
 }
+.divLogin > p{
+    padding-top: 10px;
+    font-size: 15px;
+}
+.divLogin > form > p{
+    padding-top: 10px;
+    font-size: 15px;
+}
 .divLogin > div:first-child{
     margin-bottom: 20px;
 }

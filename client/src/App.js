@@ -59,9 +59,9 @@ function App() {
           </Route>
           <Route path='adminLogin' element={<AdminLogin onAdminLogin={handleAdminLogin} />} />
           <Route path='/' element={<Layout2  onAdminLogout={handleAdminLogout} />}>
-            <Route path='adminHome' element={adminLoggedIn ? <AdminHome onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
-            <Route path='adminSponsor' element={adminLoggedIn ? <AdminSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
-            <Route path='adminNewSponsor' element={adminLoggedIn ? <AdminNewSponsor onAdminLogout={handleAdminLogout} /> : <Navigate to="/adminLogin" />} />
+            <Route path='adminHome' element={adminLoggedIn ? <AdminHome /> : <Navigate to="/adminLogin" />} />
+            <Route path='adminSponsor' element={adminLoggedIn ? <AdminSponsor /> : <Navigate to="/adminLogin" />} />
+            <Route path='adminNewSponsor' element={adminLoggedIn ? <AdminNewSponsor /> : <Navigate to="/adminLogin" />} />
           </Route>
           <Route path='*' element={<NotFound />} />
        </Routes>

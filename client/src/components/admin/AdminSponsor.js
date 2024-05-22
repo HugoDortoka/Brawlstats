@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AdminSponsor({ onAdminLogout }) {
+function AdminSponsor() {
     const [sponsors, setSponsors] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [currentSponsor, setCurrentSponsor] = useState({ CIF: '', nom: '', logo: '' });
@@ -18,7 +18,7 @@ function AdminSponsor({ onAdminLogout }) {
         })
         .then(response => {
           if (!response.ok) {
-            throw new Error('No se pudo completar la solicitud');
+            throw new Error('Request could not be completed');
           }
           return response.json();
         })
@@ -50,7 +50,7 @@ function AdminSponsor({ onAdminLogout }) {
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('No se pudo completar la solicitud de eliminación');
+                    throw new Error('Delete request could not be completed');
                 }
                 setSponsors(sponsors.filter(sponsor => sponsor.CIF !== CIF));
             })
@@ -74,7 +74,7 @@ function AdminSponsor({ onAdminLogout }) {
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('No se pudo completar la solicitud de edición');
+                    throw new Error('Edit request could not be completed');
                 }
                 return response.json();
             })

@@ -8,7 +8,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [tag, setTag] = useState('');
     const [playerData, setPlayerData] = useState(null);
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
   
@@ -16,10 +16,8 @@ function Register() {
       try {
           const response = await axios.get(`http://localhost:3000/${tag}`);
           setPlayerData(response.data);
-          setError('');
           return response.data;
       } catch (err) {
-          setError(err.response.data.message || 'Player Not Found');
           setPlayerData(null);
           throw err;
       }
@@ -43,10 +41,10 @@ function Register() {
               window.alert('User created correctly');
               navigate('/login');
           } else {
-              window.alert('Error creating the user');
+              setErrorMessage('Error creating the user');
           }
         } else {
-          window.alert('Enter a valid tag');
+          setErrorMessage('Enter a valid tag');
         }
       } catch (error) {
         console.error('Error:', error);
@@ -70,6 +68,7 @@ function Register() {
               <button className="submit__login" type="submit">Sing Up</button>
             </form>
             <Link to="/login" className="link">Log In</Link>
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           </div>
         </div>
       </div>

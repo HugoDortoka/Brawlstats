@@ -89,9 +89,6 @@ function Club() {
                             ))}
                         </div>
                     </div>
-
-
-                        {console.log(clubData)}
                 </div>
             )}
         </div>

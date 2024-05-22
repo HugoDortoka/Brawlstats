@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AdminNewSponsor({ onAdminLogout }) {
+function AdminNewSponsor() {
     const navigate = useNavigate();
     const [cif, setCif] = useState('');
     const [name, setName] = useState('');
@@ -10,12 +10,12 @@ function AdminNewSponsor({ onAdminLogout }) {
 
     const handleSaveSponsor = async () => {
         if (!cif || !name || !logo) {
-            setErrorMessage('Todos los campos son obligatorios.');
+            setErrorMessage('All fields are required');
             return;
         }
 
         if (!validateCIF(cif)) {
-            setErrorMessage('El CIF no es válido.');
+            setErrorMessage('The CIF is not valid');
             return;
         }
 
@@ -31,15 +31,15 @@ function AdminNewSponsor({ onAdminLogout }) {
             });
 
             if (response.ok) {
-                window.alert('Sponsor creado correctamente');
+                window.alert('Sponsor created correctly');
                 navigate('/adminSponsor');
             } else {
                 const errorText = await response.text();
-                window.alert(`Error al crear el sponsor: ${errorText}`);
+                window.alert(`Error creating sponsor: ${errorText}`);
             }
         } catch (error) {
-            console.error('Error al crear el sponsor:', error);
-            window.alert('Error al crear el sponsor');
+            console.error('Error creating sponsor:', error);
+            window.alert('Error creating sponsor');
         }
 
         setErrorMessage(''); // Limpiar mensaje de error al guardar correctamente
@@ -89,9 +89,9 @@ function AdminNewSponsor({ onAdminLogout }) {
                             required
                         />
                     </label>
-                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                     <button className='buttonAdminSponsors' type="button" onClick={handleSaveSponsor}>Save</button>
                     <button className='buttonAdminSponsors' type="button" onClick={handleRedirectSponsor}>Cancel</button>
+                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                 </form>
             </div>
         </div>

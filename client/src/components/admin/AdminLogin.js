@@ -22,12 +22,13 @@ function AdminLogin({ onAdminLogin }) {
       if (response.ok) {
         localStorage.setItem('adminLoggedIn', 'true');
         onAdminLogin(); // Llama a la función onLogin
+        setErrorMessage('');
         navigate('/adminHome');
       } else {
-        window.alert('Credenciales incorrectas');
+        setErrorMessage('Incorrect credentials');
       }
     } catch (error) {
-      console.error('Error al enviar la solicitud:', error);
+      console.error('Error sending request:', error);
     }
   };
 
@@ -44,6 +45,7 @@ function AdminLogin({ onAdminLogin }) {
               <input className="input__login" type="password" id="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
             <button className="submit__login" type="submit">Log In</button>
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           </form>
         </div>
       </div>

@@ -24,12 +24,13 @@ function Login({ onUserLogin }) {
           const userData = await response.json();
           localStorage.setItem('userLoggedIn', userData.tag);
           onUserLogin(); // Llama a la función onLogin
+          setErrorMessage('');
           navigate('/');
         } else {
-          window.alert('Credenciales incorrectas');
+          setErrorMessage('Incorrect credentials');
         }
       } catch (error) {
-        console.error('Error al enviar la solicitud:', error);
+        console.error('Error sending request:', error);
       }
     };
   
@@ -48,6 +49,7 @@ function Login({ onUserLogin }) {
               <button className="submit__login" type="submit">Log In</button>
             </form>
             <Link to="/register" className="link">Register</Link>
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           </div>
         </div>
       </div>

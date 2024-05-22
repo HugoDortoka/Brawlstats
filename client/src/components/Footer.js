@@ -15,7 +15,7 @@ function Footer() {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('No se pudo completar la solicitud');
+        throw new Error('Request could not be completed');
       }
       return response.json();
     })

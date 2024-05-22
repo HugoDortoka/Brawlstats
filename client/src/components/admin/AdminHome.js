@@ -6,7 +6,7 @@ import { Bar } from 'react-chartjs-2';
 
 Chart.register(...registerables);
 
-function AdminHome({ onAdminLogout }) {
+function AdminHome() {
     const [tags, setTags] = useState([]);
     const [tagsTaked, setTagsTaked] = useState(false);
     const [dataTaked, setDataTaked] = useState(false);
@@ -107,7 +107,7 @@ function AdminHome({ onAdminLogout }) {
             });
         
             if (!response.ok) {
-              throw new Error('No se pudo completar la solicitud');
+              throw new Error('Request could not be completed');
             }
         
             const data = await response.json();
