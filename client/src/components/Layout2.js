@@ -27,7 +27,7 @@ function Layout2({ onAdminLogout }) {
     <div>
       <header>
         <div className="navbar">
-          <div className="logo"><Link to="/" className="logo">Brawl Stats</Link></div>
+          <div className="logo"><Link to="/adminHome" className="logo">Brawl Stats</Link></div>
         
           <ul className="links">
             <li><Link to="/adminHome" className="link">Statistics</Link></li>
