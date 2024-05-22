@@ -29,6 +29,8 @@ function Search() {
 
     
     const getPlayerDetails = () => {
+        setPlayerData(null);
+        setBattleLog(null);
         axios
         .get(`http://localhost:3000/${playerTag}`)
         .then((response) => {
