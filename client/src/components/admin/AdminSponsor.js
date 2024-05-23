@@ -137,7 +137,7 @@ function AdminSponsor() {
                 {isEditing && (
                     <div>
                         <h2 className='titleAdminSponsors'>Edit Sponsor</h2>
-                        <form>
+                        <form className='editingSponsor'>
                             <label>
                                 CIF:
                                 <input

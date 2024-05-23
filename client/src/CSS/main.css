@@ -644,10 +644,27 @@ footer div {
     margin-right: 10px;
 } 
 
-
 @media(max-width: 850px){
     .tableSponsors td{
         text-align: center;
         padding: 5px;
     }
+    
+    .editingSponsor{
+        display: grid;
+        padding-top: 0 !important;
+        padding: 40px;
+
+    }
+    .editingSponsor label{
+        margin-top: 5px;
+    }
+    .editingSponsor button{
+        margin-top: 5px;
+    }
+    .changeLogo{
+        width: auto;
+        text-align: center;
+    }
+
 }
