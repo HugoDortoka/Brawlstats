@@ -121,6 +121,7 @@ header {
     background: url(../assets/images/front-bg-small.f14153.jpg) 0/cover;
     display: grid;
     place-content: center;
+    min-height: 75vh;
 
 }
 .form  > div:first-child {
